@@ -1,5 +1,6 @@
 import os
 import pyautogui
+import ctypes
 
 from flask import Flask, render_template_string
 
@@ -42,6 +43,14 @@ def press_space():
         return str(e), 500
 
 if __name__ == '__main__':
+    # Получаем хэндл окна консоли
+    whnd = ctypes.windll.kernel32.GetConsoleWindow()
+
+    # Если окно есть, скрываем его
+    if whnd != 0:
+        ctypes.windll.user32.ShowWindow(whnd, 0)
+        
+    # Запуск сервера
     app.run(host='0.0.0.0', port=8888)
     
     
