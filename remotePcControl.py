@@ -20,7 +20,7 @@ def index():
                 <ul>
                     <li><a href="/">Главная</a></li>
                     <li><a href="/suspend">Перевести систему в спящий режим</a></li>
-                    <li><a href="/space">Нажать пробел</a></li>
+                    <li><a href="/press_key/">Нажать какую-либо кнопку</a></li>
                 </ul>
             </body>
         </html>
@@ -34,11 +34,11 @@ def suspend_system():
     except Exception as e:
         return str(e), 500
 
-@app.route('/space', methods=['GET'])
-def press_space():
+@app.route('/press_key/<string:key_name>', methods=['GET'])
+def press_key(key_name):
     try:
-        pyautogui.press('space')
-        return "Space key pressed", 200
+        pyautogui.press('key_name')
+        return f"{key_name} key pressed", 200
     except Exception as e:
         return str(e), 500
 
